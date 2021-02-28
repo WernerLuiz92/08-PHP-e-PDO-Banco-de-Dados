@@ -6,8 +6,8 @@ require_once 'vendor/autoload.php';
 
 $student = new Student(
     null,
-    'Vinicius Dias',
-    new \DateTimeImmutable('1997-10-15')
+    'Werner Luiz Gottschalt',
+    new \DateTimeImmutable('1992-05-01')
 );
 
 echo $student->age();
