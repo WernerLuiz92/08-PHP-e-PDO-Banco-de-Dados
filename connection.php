@@ -1,7 +1,8 @@
 <?php
 
-$dbPath = __DIR__ . '/dataBase.sqlite';
-$pdo = new PDO('sqlite:' . $dbPath);
+use Werner\Pdo\Infrastructure\Persistence\DatabaseConnection;
+
+$pdo = DatabaseConnection::CreateConnection();
 
 echo "Connection successful!";
 

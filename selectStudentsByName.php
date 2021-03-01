@@ -6,9 +6,9 @@ require_once 'vendor/autoload.php';
 
 $studentRepo = new PdoStudentRepository;
 
-$name = "Werner Luiz Gottschalt";
+$name = "Am";
 
-$studentsList = $studentRepo->oneStudent($name);
+$studentsList = $studentRepo->studentsByName($name);
 
 foreach ($studentsList as $student) {
     echo "ID: {$student->getId()} <br>";

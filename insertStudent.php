@@ -1,21 +1,19 @@
 <?php
 
 use Werner\Pdo\Domain\Model\Student;
+use Werner\Pdo\Infrastructure\Repository\PdoStudentRepository;
 
 require_once 'vendor/autoload.php';
 
-$dbPath = __DIR__ . '/dataBase.sqlite';
-$pdo = new PDO('sqlite:' . $dbPath);
+$student1 = new Student(null, 'Sandra Renata Daiane Martins', new DateTimeImmutable('1948-08-20'));
+$student2 = new Student(1, 'Werner Luiz Gottschalt',  new DateTimeImmutable('1992-05-01'));
 
-$student = new Student(null, "Helena Liz Isabelle Rocha", new \DateTimeImmutable('1964-05-16'));
+$studentRepo = new PdoStudentRepository();
 
-$sqlInsert = "INSERT INTO students (name, birth_date) VALUES (:name, :birth_date);";
-$statement = $pdo->prepare($sqlInsert);
-$statement->bindValue(':name', $student->name());
-$statement->bindValue(':birth_date', $student->birthDate()->format('Y-m-d'));
+// if ($studentRepo->save($student1)) {
+//     echo "Aluno Cadastrado com sucesso! <br>";
+// }
 
-if (!$statement->execute()) {
-    echo "Erro ao cadastrar aluno";
-    exit();
-}
-echo "Aluno cadastrado com sucesso!";
+if ($studentRepo->save($student2)) {
+    echo "Aluno Atualizado com sucesso! <br>";
+};

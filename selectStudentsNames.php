@@ -1,11 +1,11 @@
 <?php
 
 use Werner\Pdo\Domain\Model\Student;
+use Werner\Pdo\Infrastructure\Persistence\DatabaseConnection;
 
 require_once 'vendor/autoload.php';
 
-$dbPath = __DIR__ . '/dataBase.sqlite';
-$pdo = new PDO('sqlite:' . $dbPath);
+$pdo = DatabaseConnection::CreateConnection();
 
 $statement = $pdo->query("SELECT * FROM students;");
 

@@ -6,9 +6,9 @@ require_once 'vendor/autoload.php';
 
 $studentRepo = new PdoStudentRepository;
 
-$name = "Werner Luiz Gottschalt";
+$birthDate = new DateTimeImmutable('1992-05-01');
 
-$studentsList = $studentRepo->oneStudent($name);
+$studentsList = $studentRepo->studentsBirthAt($birthDate);
 
 foreach ($studentsList as $student) {
     echo "ID: {$student->getId()} <br>";

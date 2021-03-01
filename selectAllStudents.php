@@ -1,27 +1,17 @@
 <?php
 
-use Werner\Pdo\Domain\Model\Student;
+use Werner\Pdo\Infrastructure\Repository\PdoStudentRepository;
 
 require_once 'vendor/autoload.php';
 
-$dbPath = __DIR__ . '/dataBase.sqlite';
-$pdo = new PDO('sqlite:' . $dbPath);
+$studentRepo = new PdoStudentRepository;
 
-$statement = $pdo->query('SELECT * FROM students;');
+$studentsList = $studentRepo->allStudents();
 
-$studentDataList = $statement->fetchAll(PDO::FETCH_ASSOC);
-$studentList = [];
-
-foreach ($studentDataList as $studentData) {
-    $studentList[] = new Student(
-        $studentData['id'],
-        $studentData['name'],
-        new \DateTimeImmutable(
-            $studentData['birth_date']
-        )
-    );
+foreach ($studentsList as $student) {
+    echo "ID: {$student->getId()} <br>";
+    echo "Nome: {$student->getName()} <br>";
+    echo "Data de Nascimento: {$student->getBirthDate()->format('d/m/Y')} <br>";
+    echo "Idade: {$student->getAge()} <br>";
+    echo "<br>";
 }
-
-echo "<pre>";
-var_dump($studentList);
-echo "</pre>";
