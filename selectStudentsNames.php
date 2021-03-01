@@ -10,5 +10,5 @@ $pdo = new PDO('sqlite:' . $dbPath);
 $statement = $pdo->query("SELECT * FROM students;");
 
 while ($student = $statement->fetchColumn(1)) {
-    echo "Olá {$student}!". PHP_EOL;
+    echo "Olá {$student}! <br>";
 }

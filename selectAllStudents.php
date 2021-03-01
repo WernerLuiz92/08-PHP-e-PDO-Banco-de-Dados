@@ -14,12 +14,14 @@ $studentList = [];
 
 foreach ($studentDataList as $studentData) {
     $studentList[] = new Student(
-        $studentData['id'], 
-        $studentData['name'], 
+        $studentData['id'],
+        $studentData['name'],
         new \DateTimeImmutable(
             $studentData['birth_date']
         )
     );
 }
 
+echo "<pre>";
 var_dump($studentList);
+echo "</pre>";

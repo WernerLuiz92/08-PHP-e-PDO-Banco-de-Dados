@@ -14,27 +14,27 @@ $statement = $pdo->query("SELECT * FROM students WHERE id = 1;");
 $studentData = $statement->fetch(PDO::FETCH_ASSOC);
 
 $student = new Student(
-    $studentData['id'], 
-    $studentData['name'], 
+    $studentData['id'],
+    $studentData['name'],
     new \DateTimeImmutable(
         $studentData['birth_date']
     )
 );
 
-echo "Olá {$student->name()}! A sua idade é de {$student->age()} anos.". PHP_EOL;
+echo "Olá {$student->name()}! A sua idade é de {$student->age()} anos. <br>";
 
 
 //** Trás todos os estudantes porém um de cada vez usando o fetch */
 // $statement = $pdo->query("SELECT * FROM students;");
-//
+
 // while ($studentData = $statement->fetch(PDO::FETCH_ASSOC)) {
 //     $student = new Student(
-//         $studentData['id'], 
-//         $studentData['name'], 
+//         $studentData['id'],
+//         $studentData['name'],
 //         new \DateTimeImmutable(
 //             $studentData['birth_date']
 //         )
 //     );
-//
-//     echo "Olá {$student->name()}! A sua idade é de {$student->age()} anos.". PHP_EOL;
+
+//     echo "Olá {$student->name()}! A sua idade é de {$student->age()} anos. <br>";
 // }
