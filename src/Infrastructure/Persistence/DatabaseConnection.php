@@ -6,7 +6,7 @@ use PDO;
 
 class DatabaseConnection
 {
-    public static function CreateConnection(): PDO
+    public static function createConnection(): PDO
     {
         $databasePath = __DIR__ . '/../../../dataBase.sqlite';
 

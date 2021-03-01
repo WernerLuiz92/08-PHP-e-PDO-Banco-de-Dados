@@ -5,18 +5,16 @@ namespace Werner\Pdo\Infrastructure\Repository;
 use DateTimeImmutable;
 use PDO;
 use PDOStatement;
-use DateTimeInterface;
 use Werner\Pdo\Domain\Model\Student;
 use Werner\Pdo\Domain\Repository\StudentRepository;
-use Werner\Pdo\Infrastructure\Persistence\DatabaseConnection;
 
 class PdoStudentRepository implements StudentRepository
 {
     private PDO $connection;
 
-    public function __construct()
+    public function __construct(PDO $PDOconnection)
     {
-        $this->connection = DatabaseConnection::CreateConnection();
+        $this->connection = $PDOconnection;
     }
 
     public function allStudents(): array
