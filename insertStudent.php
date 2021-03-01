@@ -7,8 +7,15 @@ require_once 'vendor/autoload.php';
 $dbPath = __DIR__ . '/dataBase.sqlite';
 $pdo = new PDO('sqlite:' . $dbPath);
 
-$student = new Student(null, 'Werner Luiz Gottschalt', new \DateTimeImmutable('1992-05-01'));
+$student = new Student(null, "Vinícius Dias", new \DateTimeImmutable('1998-05-14'));
 
-$sqlInsert = "INSERT INTO students (name, birth_date) VALUES ('{$student->name()}', '{$student->birthDate()->format('Y-m-d')}');";
+$sqlInsert = "INSERT INTO students (name, birth_date) VALUES (?, ?);";
+$statement = $pdo->prepare($sqlInsert);
+$statement->bindValue(1, $student->name());
+$statement->bindValue(2, $student->birthDate()->format('Y-m-d'));
 
-var_dump($pdo->exec($sqlInsert));
+if (!$statement->execute()) {
+    echo "Erro ao cadastrar aluno";
+    exit();
+}
+echo "Aluno cadastrado com sucesso!";
