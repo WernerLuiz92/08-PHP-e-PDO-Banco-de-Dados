@@ -1,5 +1,8 @@
 Nesta aula, aprendemos: 
 
 
--> 
-    => 
+-> A importância de tratar erros em nossa aplicação
+-> Que, por padrão, o PDO não emite nenhum tipo de erro
+-> A recuperar as informações de erro através do método errorInfo
+-> Como informar ao PDO para lançar exceções em casos de erro
+-> Outros atributos para configurar a conexão com o banco utilizando PDO
