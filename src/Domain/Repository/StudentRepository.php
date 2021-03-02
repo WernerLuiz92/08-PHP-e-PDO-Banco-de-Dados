@@ -7,6 +7,7 @@ use Werner\Pdo\Domain\Model\Student;
 interface StudentRepository
 {
     public function allStudents(): array;
+    public function studentsWithPhones(): array;
     public function oneStudent($name): array;
     public function studentsByName($name): array;
     public function studentsBirthAt(\DateTimeInterface $birthDate): array;

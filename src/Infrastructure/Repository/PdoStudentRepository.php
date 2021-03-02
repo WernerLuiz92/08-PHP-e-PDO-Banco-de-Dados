@@ -5,8 +5,7 @@ namespace Werner\Pdo\Infrastructure\Repository;
 use DateTimeImmutable;
 use PDO;
 use PDOStatement;
-use RuntimeException;
-use SebastianBergmann\Environment\Runtime;
+use Werner\Pdo\Domain\Model\Phone;
 use Werner\Pdo\Domain\Model\Student;
 use Werner\Pdo\Domain\Repository\StudentRepository;
 
@@ -70,14 +69,39 @@ class PdoStudentRepository implements StudentRepository
         $studentList = [];
 
         foreach ($studentDataList as $studentData) {
-            $studentList[] = new Student(
+            $student = new Student(
                 $studentData['id'],
                 $studentData['name'],
                 new DateTimeImmutable($studentData['birth_date'])
             );
+
+            $this->fillPhonesOf($student);
+
+            $studentList[] = $student;
         }
 
         return $studentList;
+    }
+
+    private function fillPhonesOf($student): void
+    {
+        $sqlQuery = 'SELECT id, area_code, number FROM phones WHERE student_id = :id';
+        $statement = $this->connection->prepare($sqlQuery);
+        $statement->execute([
+            ':id' => $student->getId()
+        ]);
+
+        $phoneDataList = $statement->fetchAll();
+
+        foreach ($phoneDataList as $phoneData) {
+            $phone = new Phone(
+                $phoneData['id'],
+                $phoneData['area_code'],
+                $phoneData['number']
+            );
+
+            $student->addPhone($phone);
+        }
     }
 
     public function save(Student $student): bool
