@@ -8,10 +8,16 @@ require_once 'vendor/autoload.php';
 
 $pdo = DatabaseConnection::CreateConnection();
 
-$studentRepo = new PdoStudentRepository($pdo);
+$studentRepository = new PdoStudentRepository($pdo);
 
-$student = new Student(10, 'Sandra Renata Daiane Martins', new DateTimeImmutable('1948-08-20'));
+$studentsList = $studentRepository->allStudents();
 
-if ($studentRepo->remove($student)) {
-    echo "Aluno excluído com sucesso!";
+$alunosParaExcluir = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21];
+
+foreach ($studentsList as $student) {
+    if (in_array($student->getId(), $alunosParaExcluir, true)) {
+        if ($studentRepository->remove($student)) {
+            echo "Aluno excluído com sucesso!";
+        }
+    }
 }

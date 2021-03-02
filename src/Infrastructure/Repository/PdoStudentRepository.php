@@ -5,6 +5,8 @@ namespace Werner\Pdo\Infrastructure\Repository;
 use DateTimeImmutable;
 use PDO;
 use PDOStatement;
+use RuntimeException;
+use SebastianBergmann\Environment\Runtime;
 use Werner\Pdo\Domain\Model\Student;
 use Werner\Pdo\Domain\Repository\StudentRepository;
 
@@ -64,7 +66,7 @@ class PdoStudentRepository implements StudentRepository
 
     private function hydrateStudentList(PDOStatement $statement): array
     {
-        $studentDataList = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $studentDataList = $statement->fetchAll();
         $studentList = [];
 
         foreach ($studentDataList as $studentData) {
